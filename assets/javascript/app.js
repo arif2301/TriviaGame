@@ -3,43 +3,13 @@
 
 console.log ("testing for Trivia Game");
 
+
 $(document).ready(function() {
-//var isreturn_str = $('#first-question').data('return');
-//var isreturn_str = $(this).data('return');
-//console.log (isreturn_str);
-//console.log (typeof isreturn_str);
-
-
-//var isreturn = (isreturn_str === 'true');
-
-
-
-
-$(".question-one").on("click", function() {
-    //var isreturn_str = $('.labelclick').data('return');
-    //var isreturn_str = $('#first-question').data('return');
-//    $("input").each(function(){
-//            var isreturn_str = $(this).data('return');
-//            console.log (isreturn_str);
-//console.log (typeof isreturn_str);
-      //});
-    //var isreturn_str = $('.question').data('return'); doesnt work
- 
-//var isreturn_str = $(this).data('return');
-//var test2 = $('#first-question').val();
-//var test2 = $(".labelclick").data("return");
-          // In this case, the "this" keyword refers to the button that was clicked
-          answer [0] = $(this).attr('data-return');
-//var test2 = $(this).val();
-//var test2 = $(".labelclick").val()
-//console.log (isreturn_str);
-//console.log (typeof isreturn_str);
-      
-console.log (answer [0]);
-
-
-
-
+$( ".game" ).hide();
+$(".start-button").on("click", function(){
+    $(".start-screen").hide();
+    $( ".game" ).show();
+    start();
 })
 
 var answer = [
@@ -52,13 +22,14 @@ var answer = [
     "undefined",
 ]
 
+$(".question-one").on("click", function() {
+    answer [0] = $(this).attr('data-return');
+})
 $(".question-two").on("click", function() {
     answer[1] = $(this).attr('data-return');
-    console.log ("2" + answer[1])
 })
 $(".question-three").on("click", function() {
-    answer[2] = $(this).attr('data-return');
-  
+    answer[2] = $(this).attr('data-return');  
 })
 $(".question-four").on("click", function() {
     answer[3] = $(this).attr('data-return');
@@ -76,6 +47,38 @@ $(".question-seven").on("click", function() {
 
 
 // need a timer function for 30 seconds
+var intervalId;
+var time = 30;
+
+function start() {
+    intervalId = setInterval(count, 1000);
+  }
+
+function timeConverter(t) {
+
+    var minutes = Math.floor(t / 60);
+    var seconds = t - (minutes * 60);
+  
+    if (seconds < 10) {
+      seconds = "0" + seconds;
+    }
+    return seconds;
+  }
+
+  function count() {
+    time--;
+  
+    var converted = timeConverter(time);
+    console.log(converted);
+  
+    $("#time-display").text("You have " + converted + " seconds left");
+    if (time===0){
+        $( ".game" ).hide();
+        results ();
+        clearInterval(intervalId);
+        console.log ("time over");
+    }
+  }
 
 
 
@@ -106,8 +109,8 @@ function results () {
     console.log ("questions not answered : " + notAnswered);
 }
 
+// function for showing the results
 $(".submit-button").on("click", function(){
-
     $( ".game" ).hide();
     results ();
 
