@@ -76,7 +76,7 @@ function timeConverter(t) {
         $( ".game" ).hide();
         results ();
         clearInterval(intervalId);
-        console.log ("time over");
+
     }
   }
 
@@ -99,20 +99,17 @@ function results () {
             notAnswered += 1;
         }
     }
-    $("#declare").text ("time's up! lets see how you did");
-    $("#wins").text ("correct answers : " + wins);
-    $("#loss").text ("wrong answers : " + loss);
-    $("#no-answer").text ("questions not answered : " + notAnswered);
-
-    console.log ("correct answers : " + wins);
-    console.log ("wrong answers : " + loss);
-    console.log ("questions not answered : " + notAnswered);
+    $("#declare").text ("Time's up! Lets see how you did");
+    $("#wins").text ("Correct answers : " + wins);
+    $("#loss").text ("Wrong answers : " + loss);
+    $("#no-answer").text ("Questions not answered : " + notAnswered);
 }
 
 // function for showing the results
 $(".submit-button").on("click", function(){
     $( ".game" ).hide();
     results ();
+    clearInterval(intervalId);
 
 })
 
